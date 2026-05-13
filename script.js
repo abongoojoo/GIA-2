@@ -3,11 +3,22 @@ const toggleButton = document.querySelector('.menu-toggle');
 const navLinks = document.querySelectorAll('.primary-nav a');
 const sections = document.querySelectorAll('.section-animate');
 
+const setActiveNavLink = () => {
+  let currentPage = window.location.pathname.split('/').pop();
+  if (!currentPage || currentPage === '') currentPage = 'index.html';
+  const activeLink = document.querySelector(`.primary-nav a[href="${currentPage}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active');
+  }
+};
+
 const toggleMenu = () => {
   const expanded = toggleButton.getAttribute('aria-expanded') === 'true';
   toggleButton.setAttribute('aria-expanded', String(!expanded));
   nav.classList.toggle('show');
 };
+
+setActiveNavLink();
 
 toggleButton.addEventListener('click', toggleMenu);
 
